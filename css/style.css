@@ -8,6 +8,8 @@
   --body-color: #f7ecde;
   --creamy-color: #fffdfa;
   --white-color: #fff;
+  --gray-foreground: #6d6d6d;
+  --charcoal-color: #1a1a1a;
   --foreground-color: #212529;
   --light-foreground-color: #352e28;
 
@@ -44,13 +46,10 @@ body {
 }
 
 .container {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
   width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: auto;
-  margin-left: auto;
+  padding-right: calc(1.5rem * 0.5);
+  padding-left: calc(1.5rem * 0.5);
+  margin-inline: auto;
 }
 @media (min-width: 576px) {
   .container {
@@ -80,12 +79,6 @@ body {
 /* ------------------------------ /
 / Headings /
 / ------------------------------ */
-h1,
-h2 {
-  font-weight: 500;
-  text-align: center;
-}
-
 h1 {
   width: fit-content;
   margin-inline: auto;
@@ -120,6 +113,7 @@ h1:hover::before {
 h2 {
   font-family: "Righteous", sans-serif;
   font-size: clamp(1.4rem, 3vw + 1rem, 1.8rem);
+  text-align: center;
 
   width: fit-content;
   margin-inline: auto;
@@ -162,13 +156,13 @@ form {
   min-width: 100%;
   max-width: 100%;
   height: 40px;
-  background-color: var(--creamy-color);
 
-  padding-inline: 14px;
+  padding-inline: 14px 35px;
   border: 2px solid var(--default-border);
   outline: transparent;
 
-  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+  background-color: var(--creamy-color);
+  transition: border-color var(--trns), box-shadow var(--trns);
 }
 .form-control input:focus {
   border-color: var(--accent-color);
@@ -185,12 +179,13 @@ form {
 
 /* Input Icon */
 .form-control .icon {
-  position: absolute;
-  inset: 0 10px 0 auto;
-  margin: auto;
   display: grid;
   padding-block-start: 1px;
   place-items: center;
+
+  position: absolute;
+  inset: 0 10px 0 auto;
+  margin: auto;
 }
 .form-control .icon svg {
   display: none;
@@ -220,8 +215,7 @@ form {
   background-color: var(--creamy-color);
 
   font-size: 1rem;
-  font-weight: 500;
-  color: #aaa;
+  color: var(--gray-foreground);
 
   transition: inset cubic-bezier(0.8, -0.4, 0.5, 1),
     font-weight cubic-bezier(0.8, -0.4, 0.5, 1),
@@ -235,8 +229,9 @@ form {
 }
 .form-control input:is(:not(:placeholder-shown), :focus) ~ label {
   inset: -60px auto 0 15px;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--light-foreground-color);
+
   border-inline: 2px solid var(--accent-color);
 }
 .form-control input:valid ~ label {
@@ -264,7 +259,7 @@ input[type="submit"] {
   border-radius: 6px;
 
   display: block;
-  color: var(--white-color);
+  color: var(--charcoal-color);
   background-color: var(--accent-color);
   cursor: pointer;
 
@@ -274,6 +269,7 @@ input[type="submit"] {
 }
 input[type="submit"]:is(:hover, :focus-visible) {
   background-color: var(--dark-accent-color);
+  color: var(--white-color);
 }
 input[type="submit"]:focus {
   color: var(--foreground-color);
@@ -290,13 +286,14 @@ input[type="submit"]:focus {
 }
 table {
   min-width: 100%;
-  background-color: var(--creamy-color);
-  text-align: center;
   margin-block-start: 25px;
   margin-inline: auto;
+
+  background-color: var(--creamy-color);
+  text-align: center;
 }
 table th {
-  font-weight: 700;
+  font-weight: bold;
 }
 table :is(th, td) {
   padding: 8px;
@@ -310,9 +307,9 @@ table tr a {
 
   padding: 6px 12px;
   border-radius: 6px;
-  color: var(--white-color);
+  color: var(--charcoal-color);
 
-  transition: background-color var(--trns);
+  transition: color var(--trns), background-color var(--trns);
 }
 table tr a svg {
   flex-shrink: 0;
@@ -321,12 +318,14 @@ table tr .visit {
   background-color: var(--visit-btn);
 }
 table tr .visit:is(:hover, :focus-visible) {
+  color: var(--white-color);
   background-color: var(--dark-visit-btn);
 }
 table tr .delete {
   background-color: var(--delete-btn);
 }
 table tr .delete:is(:hover, :focus-visible) {
+  color: var(--white-color);
   background-color: var(--dark-delete-btn);
 }
 
@@ -335,16 +334,15 @@ table tr .delete:is(:hover, :focus-visible) {
 / ------------------------------ */
 #modal {
   display: none;
-  place-content: center;
+  background-color: #0007;
 
   position: fixed;
   margin: auto;
   inset: 0;
-
-  background-color: #0007;
 }
 #modal.appear {
   display: grid;
+  place-content: center;
 }
 
 #modal .message {
@@ -393,9 +391,9 @@ table tr .delete:is(:hover, :focus-visible) {
 #modal .message p:not(.li) {
   font-family: "Bree Serif", serif;
   font-size: 1.25rem;
+  color: var(--light-foreground-color);
 
   margin-block-end: 18px;
-  color: var(--light-foreground-color);
 }
 #modal .instructions .li {
   display: flex;
@@ -405,8 +403,8 @@ table tr .delete:is(:hover, :focus-visible) {
   font-size: 1.125rem;
 }
 #modal .instructions .li svg {
-  color: var(--dark-delete-btn);
   flex-shrink: 0;
+  color: var(--dark-delete-btn);
 }
 #modal .instructions p:not(.li) + .li {
   margin-block-end: 10px;
@@ -416,11 +414,12 @@ table tr .delete:is(:hover, :focus-visible) {
   margin-block-end: 24px;
 }
 #modal .delete-confirm .btns {
-  margin-inline: auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   column-gap: 10px;
+
+  margin-inline: auto;
 }
 #modal .delete-confirm .btns :first-child {
   border: 1px solid var(--valid-border);
@@ -431,13 +430,12 @@ table tr .delete:is(:hover, :focus-visible) {
   background-color: var(--invalid-border);
 }
 #modal .delete-confirm button {
-  padding: 5px 30px;
-
-  border-radius: 6px;
-
   display: block;
   color: var(--white-color);
   cursor: pointer;
+
+  padding: 5px 30px;
+  border-radius: 6px;
 
   transition-property: color, background-color, border;
   transition-duration: 0.3s;
@@ -456,12 +454,13 @@ table tr .delete:is(:hover, :focus-visible) {
 }
 .loader-top,
 .loader-bottom {
+  position: absolute;
+  opacity: 1;
+
   width: 100%;
   height: 50%;
   background-color: var(--foreground-color);
 
-  opacity: 1;
-  position: absolute;
   transition: transform 1s ease-out, opacity 1s ease-out;
 }
 .loader-top {

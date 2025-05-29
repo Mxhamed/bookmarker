@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookmark</title>
     <meta name="author" content="Mohamed Tamer" />
+    <meta
+      name="description"
+      content="Practice CRUD operations by building a Bookmark Manager. Add, edit, delete, and organize bookmarks with this hands-on JavaScript project. Perfect for mastering create, read, update, and delete workflows." />
     <!-- Favicon -->
     <link
       rel="shortcut icon"
       href="./assets/favicon/faviconV2.png"
       type="image/x-icon" />
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=PT+Sans+Caption:wght@400;700&family=Pacifico&family=Righteous&display=swap"
-      rel="stylesheet" />
+    <link rel="stylesheet" href="./css/fonts.css" />
     <!-- CSS -->
     <!-- <link rel="stylesheet" href="./css/bootstrap-grid.min.css" /> -->
     <link rel="stylesheet" href="./css/reset.css" />
@@ -166,10 +165,12 @@
       <div class="tableResponsive">
         <table id="bookmarks">
           <thead>
-            <th>index</th>
-            <th>Website Name</th>
-            <th>Visit</th>
-            <th>Delete</th>
+            <tr>
+              <th>index</th>
+              <th>Website Name</th>
+              <th>Visit</th>
+              <th>Delete</th>
+            </tr>
           </thead>
 
           <tbody id="tableContent"></tbody>
@@ -243,7 +244,6 @@
               <button>Yes</button>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

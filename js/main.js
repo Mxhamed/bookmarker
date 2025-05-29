@@ -19,7 +19,7 @@ const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
 let delItem;
 
 // Helper Function(s)
-function displayBookmarks() {
+const displayBookmarks = function () {
   tBody.innerHTML = "";
   for (let [i, bookmark] of bookmarks.entries()) {
     tBody.insertAdjacentHTML(
@@ -72,7 +72,7 @@ function displayBookmarks() {
       `
     );
   }
-}
+};
 
 // Event Handlers
 //   Loading Screen
@@ -83,7 +83,7 @@ window.addEventListener("load", function () {
   // Remove From DOM Tree
   setTimeout(() => {
     loader.remove();
-  }, 1200);
+  }, 1100);
 });
 
 //   Crud - Create
@@ -96,6 +96,7 @@ submitBtn.addEventListener("click", (e) => {
       URL: siteURL.value,
     };
 
+    // Update, Store & Display
     bookmarks.push(bookmark);
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
     displayBookmarks();
@@ -120,6 +121,7 @@ tBody.addEventListener("click", (e) => {
   // Guard Clause
   if (!del) return;
 
+  // Show Delete-Confirmation Modal
   e.preventDefault();
   document.body.style.overflow = "hidden";
   modal.classList.add("appear");
@@ -128,13 +130,15 @@ tBody.addEventListener("click", (e) => {
   delItem = del;
 });
 modalBtns.lastElementChild.addEventListener("click", () => {
-  deleteConfirmMssg.classList.remove("appear");
-  modal.classList.remove("appear");
-  document.body.style.overflow = "visible";
-
+  // Update, Store & Display
   bookmarks.splice(delItem.dataset.index, 1);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   displayBookmarks();
+
+  // Close the Modal
+  deleteConfirmMssg.classList.remove("appear");
+  modal.classList.remove("appear");
+  document.body.style.overflow = "visible";
 });
 
 //   CLosing the Modal
