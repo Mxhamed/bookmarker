@@ -1,0 +1,480 @@
+/* ------------------------------ /
+/ General /
+/ ------------------------------ */
+:root {
+  /* Main Colors */
+  --accent-color: #fec260;
+  --dark-accent-color: #f99a01;
+  --body-color: #f7ecde;
+  --creamy-color: #fffdfa;
+  --white-color: #fff;
+  --foreground-color: #212529;
+  --light-foreground-color: #352e28;
+
+  /* Input Border */
+  --default-border: #ced4da;
+  --light-focus-border: #fed694;
+  --valid-border: #3aa6b9;
+  --light-valid-border: #86e7e8;
+  --invalid-border: #ff5c58;
+  --light-invalid-border: #ff9b9a;
+
+  /* Miscellaneous */
+  --visit-btn: #76b153;
+  --delete-btn: #e16259;
+  --dark-visit-btn: #476d31;
+  --dark-delete-btn: #b52b21;
+  --table-border: #dee2e6;
+  --h2-grad1: #40a55c;
+  --h2-grad2: #b3ac4a;
+
+  /* Handy Variables */
+  --trns: 0.3s ease-out;
+}
+body {
+  font-family: "PT Sans Caption", sans-serif;
+  color: var(--foreground-color);
+
+  background-color: var(--body-color);
+  padding-block: 50px;
+}
+::selection {
+  color: var(--foreground-color);
+  background-color: var(--accent-color);
+}
+
+.container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+/* ------------------------------ /
+/ Headings /
+/ ------------------------------ */
+h1,
+h2 {
+  font-weight: 500;
+  text-align: center;
+}
+
+h1 {
+  width: fit-content;
+  margin-inline: auto;
+  margin-block-end: 50px;
+
+  font-family: "Pacifico", cursive;
+  font-size: clamp(2rem, 10vw + 1rem, 5rem);
+  color: var(--light-foreground-color);
+
+  cursor: default;
+  position: relative;
+}
+h1::before {
+  content: "";
+  display: block;
+
+  width: 100%;
+  height: 25%;
+  background-color: var(--accent-color);
+
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  z-index: -1;
+
+  transition: height 0.3s ease-out;
+}
+h1:hover::before {
+  height: 50%;
+}
+
+h2 {
+  font-family: "Righteous", sans-serif;
+  font-size: clamp(1.4rem, 3vw + 1rem, 1.8rem);
+
+  width: fit-content;
+  margin-inline: auto;
+  margin-block-end: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(45deg, var(--h2-grad1), var(--h2-grad2));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 > * {
+  flex-shrink: 0;
+}
+h2 svg {
+  width: 0.8lh;
+  aspect-ratio: 1;
+}
+
+/* ------------------------------ /
+/ Form Section /
+/ ------------------------------ */
+.form {
+  border-block: 2px dotted var(--light-foreground-color);
+  padding-block: 25px;
+}
+form {
+  accent-color: var(--accent-color);
+  caret-color: var(--accent-color);
+}
+.form-control {
+  margin-block-end: 40px;
+  position: relative;
+}
+
+/* Input */
+.form-control input {
+  min-width: 100%;
+  max-width: 100%;
+  height: 40px;
+  background-color: var(--creamy-color);
+
+  padding-inline: 14px;
+  border: 2px solid var(--default-border);
+  outline: transparent;
+
+  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.form-control input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.25rem var(--light-focus-border);
+}
+.form-control input:valid {
+  border-color: var(--valid-border);
+  box-shadow: 0 0 0 0.25rem var(--light-valid-border);
+}
+.form-control input:not(:placeholder-shown):invalid {
+  border-color: var(--invalid-border);
+  box-shadow: 0 0 0 0.25rem var(--light-invalid-border);
+}
+
+/* Input Icon */
+.form-control .icon {
+  position: absolute;
+  inset: 0 10px 0 auto;
+  margin: auto;
+  display: grid;
+  padding-block-start: 1px;
+  place-items: center;
+}
+.form-control .icon svg {
+  display: none;
+}
+.form-control input:valid ~ .icon :last-child {
+  display: block;
+  color: var(--valid-border);
+}
+.form-control input:not(:placeholder-shown):invalid ~ .icon :first-child {
+  display: block;
+  color: var(--invalid-border);
+}
+
+/* Input Label */
+.form-control label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+
+  position: absolute;
+  margin: auto;
+  padding-inline: 4px;
+  inset: 0 auto 0 10px;
+
+  height: fit-content;
+  background-color: var(--creamy-color);
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: #aaa;
+
+  transition: inset cubic-bezier(0.8, -0.4, 0.5, 1),
+    font-weight cubic-bezier(0.8, -0.4, 0.5, 1),
+    color cubic-bezier(0.8, -0.4, 0.5, 1), border-inline ease-out;
+  transition-duration: 0.3s;
+}
+.form-control label svg {
+  width: 0.7lh;
+  aspect-ratio: 1;
+  transition: color var(--trns);
+}
+.form-control input:is(:not(:placeholder-shown), :focus) ~ label {
+  inset: -60px auto 0 15px;
+  font-weight: 600;
+  color: var(--light-foreground-color);
+  border-inline: 2px solid var(--accent-color);
+}
+.form-control input:valid ~ label {
+  border-inline: 2px solid var(--valid-border);
+}
+.form-control input:not(:placeholder-shown):invalid ~ label {
+  border-inline: 2px solid var(--invalid-border);
+}
+/*  Label Icon */
+.form-control input:is(:not(:placeholder-shown), :focus) ~ label svg {
+  color: var(--accent-color);
+}
+.form-control input:valid ~ label svg {
+  color: var(--valid-border);
+}
+.form-control input:not(:placeholder-shown):invalid ~ label svg {
+  color: var(--invalid-border);
+}
+
+/* Submit Button */
+input[type="submit"] {
+  padding: 5px 50px;
+  margin-inline: auto;
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+
+  display: block;
+  color: var(--white-color);
+  background-color: var(--accent-color);
+  cursor: pointer;
+
+  transition-property: color, background-color, border;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+input[type="submit"]:is(:hover, :focus-visible) {
+  background-color: var(--dark-accent-color);
+}
+input[type="submit"]:focus {
+  color: var(--foreground-color);
+  background-color: var(--body-color);
+  border: 1px solid var(--foreground-color);
+}
+
+/* ------------------------------ /
+/ Table /
+/ ------------------------------ */
+.tableResponsive {
+  max-width: 100%;
+  overflow-x: auto;
+}
+table {
+  min-width: 100%;
+  background-color: var(--creamy-color);
+  text-align: center;
+  margin-block-start: 25px;
+  margin-inline: auto;
+}
+table th {
+  font-weight: 700;
+}
+table :is(th, td) {
+  padding: 8px;
+  border-block-end: 1px solid var(--table-border);
+}
+table tr a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--white-color);
+
+  transition: background-color var(--trns);
+}
+table tr a svg {
+  flex-shrink: 0;
+}
+table tr .visit {
+  background-color: var(--visit-btn);
+}
+table tr .visit:is(:hover, :focus-visible) {
+  background-color: var(--dark-visit-btn);
+}
+table tr .delete {
+  background-color: var(--delete-btn);
+}
+table tr .delete:is(:hover, :focus-visible) {
+  background-color: var(--dark-delete-btn);
+}
+
+/* ------------------------------ /
+/ Modal /
+/ ------------------------------ */
+#modal {
+  display: none;
+  place-content: center;
+
+  position: fixed;
+  margin: auto;
+  inset: 0;
+
+  background-color: #0007;
+}
+#modal.appear {
+  display: grid;
+}
+
+#modal .message {
+  background-color: var(--creamy-color);
+  padding: 25px;
+  border-radius: 6px;
+}
+#modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-block-end: 24px;
+}
+#modal :is(.instructions, .delete-confirm) {
+  display: none;
+}
+#modal :is(.instructions, .delete-confirm).appear {
+  display: block;
+}
+
+#modal header svg {
+  cursor: pointer;
+}
+
+#modal .dots {
+  display: flex;
+  column-gap: 5px;
+}
+#modal .dots span {
+  display: block;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+#modal .dots :first-child {
+  background-color: var(--invalid-border);
+}
+#modal .dots :nth-child(2) {
+  background-color: var(--accent-color);
+}
+#modal .dots :last-child {
+  background-color: var(--valid-border);
+}
+
+#modal .message p:not(.li) {
+  font-family: "Bree Serif", serif;
+  font-size: 1.25rem;
+
+  margin-block-end: 18px;
+  color: var(--light-foreground-color);
+}
+#modal .instructions .li {
+  display: flex;
+  column-gap: 8px;
+
+  padding-inline-start: 8px;
+  font-size: 1.125rem;
+}
+#modal .instructions .li svg {
+  color: var(--dark-delete-btn);
+  flex-shrink: 0;
+}
+#modal .instructions p:not(.li) + .li {
+  margin-block-end: 10px;
+}
+
+#modal .delete-confirm p {
+  margin-block-end: 24px;
+}
+#modal .delete-confirm .btns {
+  margin-inline: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 10px;
+}
+#modal .delete-confirm .btns :first-child {
+  border: 1px solid var(--valid-border);
+  background-color: var(--valid-border);
+}
+#modal .delete-confirm .btns :last-child {
+  border: 1px solid var(--invalid-border);
+  background-color: var(--invalid-border);
+}
+#modal .delete-confirm button {
+  padding: 5px 30px;
+
+  border-radius: 6px;
+
+  display: block;
+  color: var(--white-color);
+  cursor: pointer;
+
+  transition-property: color, background-color, border;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+/* ------------------------------ /
+/ Loading Screen  /
+/ ------------------------------ */
+.loader {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  z-index: 01156834245;
+  pointer-events: none;
+}
+.loader-top,
+.loader-bottom {
+  width: 100%;
+  height: 50%;
+  background-color: var(--foreground-color);
+
+  opacity: 1;
+  position: absolute;
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+.loader-top {
+  top: 0;
+}
+.loader-bottom {
+  bottom: 0;
+}
+.loader.loaded .loader-top {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.loader.loaded .loader-bottom {
+  transform: translateY(100%);
+  opacity: 0;
+}
