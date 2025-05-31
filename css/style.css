@@ -339,10 +339,31 @@ table tr .delete:is(:hover, :focus-visible) {
   position: fixed;
   margin: auto;
   inset: 0;
+
+  animation: disappear 0.6s;
 }
 #modal.appear {
   display: grid;
-  place-content: center;
+  align-items: center;
+  animation: appear 0.6s;
+}
+@keyframes disappear {
+  from {
+    display: block;
+    opacity: 1;
+  }
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #modal .message {
@@ -350,6 +371,10 @@ table tr .delete:is(:hover, :focus-visible) {
   padding: 25px;
   border-radius: 6px;
 }
+#modal:not(.appear) .message {
+  display: none;
+}
+
 #modal header {
   display: flex;
   justify-content: space-between;
@@ -357,13 +382,6 @@ table tr .delete:is(:hover, :focus-visible) {
 
   margin-block-end: 24px;
 }
-#modal :is(.instructions, .delete-confirm) {
-  display: none;
-}
-#modal :is(.instructions, .delete-confirm).appear {
-  display: block;
-}
-
 #modal header svg {
   cursor: pointer;
 }
@@ -388,6 +406,12 @@ table tr .delete:is(:hover, :focus-visible) {
   background-color: var(--valid-border);
 }
 
+#modal :is(.instructions, .delete-confirm) {
+  display: none;
+}
+#modal :is(.instructions, .delete-confirm).appear {
+  display: block;
+}
 #modal .message p:not(.li) {
   font-family: "Bree Serif", serif;
   font-size: 1.25rem;
@@ -395,6 +419,7 @@ table tr .delete:is(:hover, :focus-visible) {
 
   margin-block-end: 18px;
 }
+
 #modal .instructions .li {
   display: flex;
   column-gap: 8px;
