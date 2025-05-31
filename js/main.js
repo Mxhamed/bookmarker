@@ -99,7 +99,9 @@ submitBtn.addEventListener("click", (e) => {
     // Update, Store & Display
     bookmarks.push(bookmark);
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-    displayBookmarks();
+    setTimeout(() => {
+      displayBookmarks();
+    }, 200);
 
     // Clearing Input Fields
     siteName.blur();
@@ -113,6 +115,7 @@ submitBtn.addEventListener("click", (e) => {
     modal.querySelector(".instructions").classList.add("appear");
   }
 });
+
 //   cruD - Delete
 tBody.addEventListener("click", (e) => {
   // Event Delegation
@@ -133,7 +136,9 @@ modalBtns.lastElementChild.addEventListener("click", () => {
   // Update, Store & Display
   bookmarks.splice(delItem.dataset.index, 1);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-  displayBookmarks();
+  setTimeout(() => {
+    displayBookmarks();
+  }, 200);
 
   // Close the Modal
   deleteConfirmMssg.classList.remove("appear");
@@ -141,7 +146,21 @@ modalBtns.lastElementChild.addEventListener("click", () => {
   document.body.style.overflow = "visible";
 });
 
-//   CLosing the Modal
+// Animation on Updating the Table
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (!mutation.addedNodes.length) return;
+
+    tBody.style.opacity = 0;
+
+    setTimeout(() => {
+      tBody.style.opacity = 1;
+    }, 400);
+  });
+});
+
+// CLosing the Modal
+//   Clicking the Dark Overlay
 modal.addEventListener("click", (e) => {
   if (e.target.closest(".message")) return;
 
@@ -150,12 +169,14 @@ modal.addEventListener("click", (e) => {
   modal.classList.remove("appear");
   document.body.style.overflow = "visible";
 });
+//   X Button
 modal.querySelector("#closeModalBtn").addEventListener("click", () => {
   instructionsMssg.classList.remove("appear");
   deleteConfirmMssg.classList.remove("appear");
   modal.classList.remove("appear");
   document.body.style.overflow = "visible";
 });
+//   Delete Confirmation "No" Button
 modalBtns.firstElementChild.addEventListener("click", () => {
   deleteConfirmMssg.classList.remove("appear");
   modal.classList.remove("appear");
@@ -164,3 +185,4 @@ modalBtns.firstElementChild.addEventListener("click", () => {
 
 // Init
 displayBookmarks();
+observer.observe(tBody, { childList: true });
